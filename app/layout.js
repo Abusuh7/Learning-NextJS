@@ -13,16 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-      <nav>
-      <ul className="flex justify-around w-1/2">
-        <li>
-          <Link href="/dashboard">Dashboard</Link>
-        </li>
-        <li>
-          <Link href="/firstpage">Page</Link>
-        </li>
-      </ul>
-    </nav>
+      
         {children}
         </body>
     </html>
