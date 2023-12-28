@@ -17,8 +17,8 @@ export default async function DisplayProduct() {
             <ul>
                 {
                 products.map(
-                    ({id, title, price}) => (
-                        <Products key={id} title={title} price={price} />
+                    (product) => (
+                        <Products key={product.id} title={product.title} price={product.price} />
                     )
                 )
                 }
