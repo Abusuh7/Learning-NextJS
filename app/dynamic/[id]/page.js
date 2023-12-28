@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 async function getProducts() {
     const response = await fetch('https://dummyjson.com/products?limit=10&skip=10&select=title,price');
@@ -24,6 +25,7 @@ export default async function Dynamic({params}) {
             <h1>Dynamic Product Page</h1>
             <h2>{product.title}</h2>
             <p>{product.price}</p>
+            <Link style={{border: 'solid black 2px'}} href={`/dynamic/${params.id}/review/1`}>View Review</Link>
         </div>
     )
 }
