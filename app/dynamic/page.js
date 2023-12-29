@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Button from '@mui/material/Button';
 
 async function getStaticProps() {
   const response = await fetch(
@@ -17,6 +18,7 @@ export default async function Index() {
         <div style={{ margin: "20px", padding: "20px" }} key={product.id}>
           {product.title} - {product.price} <br></br>
           <Link style={{border: "solid black 2px"}} href={`/dynamic/${product.id}`}> View Product</Link>
+          <Button outlined="contained">Hello world</Button>
         </div>
       ))}
     </div>
