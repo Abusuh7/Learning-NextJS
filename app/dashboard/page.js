@@ -17,6 +17,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
+import { UserButton } from "@clerk/nextjs";
 
 function Copyright(props) {
   return (
@@ -140,9 +141,7 @@ export default function Pricing() {
               Support
             </Link>
           </nav>
-          <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-            Login
-          </Button>
+          <UserButton afterSignOutUrl="/"/>
         </Toolbar>
       </AppBar>
       {/* Hero unit */}
