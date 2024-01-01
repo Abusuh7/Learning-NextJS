@@ -14,8 +14,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
+
 
 function Copyright(props) {
+
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
@@ -33,6 +36,13 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  console.log(email);
+  console.log(password);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -40,7 +50,20 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    //compare the email and password to the fake database
+    //if it matches, then redirect to the home page
+    //if it doesn't match, then alert the user that the email or password is incorrect
+    //if the user doesn't exist, then alert the user that the email or password is incorrect
+
+    if (email === "admin@gmail.com" && password === "admin") {
+      window.location.href = "/";
+    } else {
+      alert("Incorrect email or password");
+    }
   };
+
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -70,6 +93,14 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e) => setEmail(e.target.value)}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "black",
+                  },
+                },
+              }}
             />
             <TextField
               margin="normal"
@@ -79,7 +110,15 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
+              onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "black",
+                  },
+                },
+              }}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

@@ -40,7 +40,7 @@ function MainFeaturedPost(props) {
           backgroundColor: "rgba(0,0,0,.5)",
           transition: "background-color 0.5s ease", // Add transition for smooth effect
           "&:hover": {
-            backgroundColor: "rgba(0,0,0,.1)", // Decrease opacity on hover
+            backgroundColor: "rgba(0,0,0,.4)", // Decrease opacity on hover
           },
         }}
       />
@@ -54,17 +54,17 @@ function MainFeaturedPost(props) {
             }}
           >
             <Typography
-              component="h1"
+              component="h2"
               variant="h3"
               color="inherit"
               gutterBottom
             >
               {post.title}
             </Typography>
-            <Typography variant="h5" color="inherit" paragraph>
+            <Typography variant="h6" color="inherit" paragraph>
               {post.description}
             </Typography>
-            <Link variant="subtitle1" href="#">
+            <Link variant="subtitle1" href="#" style={{color: "black", fontWeight: "bolder"}}>
               {post.linkText}
             </Link>
           </Box>

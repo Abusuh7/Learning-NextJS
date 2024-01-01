@@ -42,19 +42,19 @@ const mainFeaturedPost = {
 
 const featuredPosts = [
   {
-    title: "Featured post",
+    title: "NextJS",
     date: "Nov 12",
     description:
       "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random?wallpapers",
+    image: "https://wallpapercave.com/wp/wp11846968.png",
     imageLabel: "Image Text",
   },
   {
-    title: "Post title",
+    title: "MUI",
     date: "Nov 11",
     description:
       "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random?wallpapers",
+    image: "https://s3-ap-south-1.amazonaws.com/trt-blog-ghost/2023/01/MaterialUi-2.png",
     imageLabel: "Image Text",
   },
 ];
@@ -96,7 +96,7 @@ export default function Blog() {
         <Header title="Blog" sections={sections} />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
-          <Grid container spacing={4}>
+          <Grid container spacing={5}>
             {featuredPosts.map((post) => (
               <FeaturedPost key={post.title} post={post} />
             ))}
