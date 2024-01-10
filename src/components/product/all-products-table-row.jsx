@@ -22,7 +22,8 @@ const AllProductsTableRow = ({ existingProduct }) => {
     if (showSuccessAlert) {
       fadeTimeout = setTimeout(() => {
         resetSuccessAlert(); // Call the function to reset the success alert state
-      }, 2000); // Adjust the timeout duration as needed
+        window.location.reload();
+      }, 1000); // Adjust the timeout duration as needed
     }
 
     return () => clearTimeout(fadeTimeout);
@@ -49,6 +50,12 @@ const AllProductsTableRow = ({ existingProduct }) => {
           <button onClick={handleDeleteProduct}>
             <Delete></Delete>
           </button>
+          <div>
+            {showSuccessAlert && (
+              <AlertMessage type="success" message="Deleted" />
+            )
+            }
+          </div>
         </td>
       </tr>
   );
