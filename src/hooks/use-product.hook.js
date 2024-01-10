@@ -40,6 +40,11 @@ export default function useProduct(props) {
         id: product.id,
       });
       console.log(response.data.message);
+      if (response.status === 200) {
+        //Refresh the page
+        // router.reload();
+        setShowSuccessAlert(true);
+      }
     } catch (error) {
       console.error("Error deleting product:", error);
     }
@@ -47,7 +52,7 @@ export default function useProduct(props) {
 
   const handleCreateProduct = async (e) => {
     e.preventDefault();
-    //TODO: Form Validation ie. Schema
+    //TODO: Form Validation ie. Schema  
     const err = validate();
     if (Object.keys(err).length !== 0) {
       setError(err);
