@@ -296,6 +296,18 @@
         "https://cdn.dummyjson.com/product-images/30/3.jpg",
         "https://cdn.dummyjson.com/product-images/30/thumbnail.jpg"
       ]
+    },
+    {
+      "title": "Voluptas tenetur err",
+      "price": "486",
+      "description": "Et omnis vero vitae ",
+      "id": 31
+    },
+    {
+      "title": "New",
+      "price": "123",
+      "description": "new",
+      "id": 32
     }
   ],
   "total": 100,

@@ -8,9 +8,14 @@ import { Alert } from "@mui/material";
 import AlertMessage from "./alert-message.jsx";
 
 export default function NewProduct({ existingProduct }) {
-  const { product, error, handleCreateProduct, handleInputChange } = useProduct(
-    { product: null }
-  );
+  const {
+    product,
+    error,
+    handleCreateProduct,
+    handleInputChange,
+    resetSuccessAlert,
+    showSuccessAlert,
+  } = useProduct({ product: null });
 
   //get the error from the hook and set it to the state
   const [errorMessage, setErrorMessage] = useState({});
@@ -22,9 +27,27 @@ export default function NewProduct({ existingProduct }) {
     }
   }, [error]);
 
+  // Alert fade
+  React.useEffect(() => {
+    let fadeTimeout;
+
+    if (showSuccessAlert) {
+      fadeTimeout = setTimeout(() => {
+        resetSuccessAlert(); // Call the function to reset the success alert state
+        window.location.reload();
+      }, 2000); // Adjust the timeout duration as needed
+    }
+
+    return () => clearTimeout(fadeTimeout);
+  }, [showSuccessAlert, resetSuccessAlert]);
+
   return (
     <div>
-      <form className="product-form" onSubmit={handleCreateProduct}>
+      <form
+        className="product-form"
+        onSubmit={handleCreateProduct}
+        style={{ marginTop: "30px" }}
+      >
         {/* <label htmlFor="title">Title:</label>
             {errorMessage.name && (
             <div
@@ -89,7 +112,7 @@ export default function NewProduct({ existingProduct }) {
             </button> */}
 
         <Typography variant="h6" gutterBottom>
-          Edit Product
+          Add Product
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
@@ -101,7 +124,7 @@ export default function NewProduct({ existingProduct }) {
               fullWidth
               // autoComplete="given-name"
               variant="standard"
-              defaultValue={product.title}
+              value={product.title}
               onChange={handleInputChange}
             />
           </Grid>
@@ -115,102 +138,31 @@ export default function NewProduct({ existingProduct }) {
               fullWidth
               // autoComplete="family-name"
               variant="standard"
-              defaultValue={product.price}
+              value={product.price}
               onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              required
-              id="brand"
-              name="brand"
-              label="Brand"
-              fullWidth
-              // autoComplete="shipping address-line1"
-              variant="standard"
-              defaultValue={product.brand}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              id="category"
-              name="category"
-              label="Category"
-              fullWidth
-              // autoComplete="shipping address-line2"
-              variant="standard"
-              defaultValue={product.category}
-              onChange={handleInputChange}
-              inputProps={{
-                style: { textTransform: "uppercase" }, // This will visually capitalize the input
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="rating"
-              name="rating"
-              label="Rating"
-              fullWidth
-              // autoComplete="shipping address-level2"
-              variant="standard"
-              onChange={handleInputChange}
-              defaultValue={product.rating}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              id="Stock"
-              name="Stock"
-              label="Stock"
-              fullWidth
-              variant="standard"
-              onChange={handleInputChange}
-              defaultValue={product.stock}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
             <TextField
               required
               id="description"
               name="description"
               label="Description"
               fullWidth
-              // autoComplete="shipping postal-code"
+              // autoComplete="shipping address-line1"
               variant="standard"
+              value={product.description}
               onChange={handleInputChange}
-              defaultValue={product.description}
-              multiline // Enable multiline input
-              rows={5} // Set the number of rows (adjust as needed)
-              style={{ width: "400px" }}
             />
           </Grid>
-          {/* <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="country"
-                name="country"
-                label="Country"
-                fullWidth
-                autoComplete="shipping country"
-                variant="standard"
-                onChange={handleInputChange}
-              />
-            </Grid> */}
-          {/* <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox color="secondary" name="saveAddress" value="yes" />
-                }
-                label="Use this address for payment details"
-              />
-            </Grid> */}
         </Grid>
 
+        {showSuccessAlert && (
+          <AlertMessage type="success" message="Product Added Successfully" />
+        )}
+
         <button type="submit" className="submit-button">
-          {existingProduct ? "Update" : "Add"}
+          Add
         </button>
       </form>
     </div>
