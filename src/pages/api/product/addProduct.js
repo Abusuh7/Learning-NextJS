@@ -7,25 +7,38 @@ export default function handler(req, res) {
     const newProduct = req.body;
 
     // Read the JSON file
-    const filePath = path.join(process.cwd(), "public/products.json");
-    const fileData = fs.readFileSync(filePath, "utf8");
-    const data = JSON.parse(fileData);
+    // Use try catch to handle errors
+    // try {
+    //   const filePath = path.join(process.cwd(), "public/products.json");
+    //   const fileData = fs.readFileSync(filePath, "utf8");
+    //   const data = JSON.parse(fileData);
+    // } catch (error) {
+    //   // showthe error to the user
+    //   console.error(error);
+    // }
 
-    //get the last id and increment it by 1
-    const lastestlength = data.products.length;
-    const lastestId = data.products[lastestlength - 1].id;
-    const newId = lastestId + 1;
+    try {
+      const filePath = path.join(process.cwd(), "public/products.json");
+      const fileData = fs.readFileSync(filePath, "utf8");
+      console.log("test");
+      const data = JSON.parse(fileData);
 
-    // Add the new id to the new product
-    newProduct.id = newId;
+      // Add the new product
+      data.products.push(newProduct);
 
-    // Add the new product
-    data.products.push(newProduct);
+      // Write the updated data back to the JSON file
+      fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 
-    // Write the updated data back to the JSON file
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+      res.status(200).json({ message: "New product added" });
+    } catch (error) {
+      //show the error to the user
+      //dont console
+      res.status(500).json({ message: "Failed to get data" });  //CHECKHERE*******
+    }
 
-    res.status(200).json({ message: "New product added" });
+    // const filePath = path.join(process.cwd(), "public/products.json");
+    // const fileData = fs.readFileSync(filePath, "utf8");
+    // const data = JSON.parse(fileData);
   } else {
     res.status(405).json({ message: "Method not allowed" });
   }

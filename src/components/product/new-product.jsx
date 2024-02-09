@@ -18,14 +18,14 @@ export default function NewProduct({ existingProduct }) {
   } = useProduct({ product: null });
 
   //get the error from the hook and set it to the state
-  const [errorMessage, setErrorMessage] = useState({});
+  //   const [errorMessage, setErrorMessage] = useState({});
 
-  useEffect(() => {
-    if (error) {
-      setErrorMessage(error);
-      console.log(error);
-    }
-  }, [error]);
+  //   useEffect(() => {
+  //     if (error) {
+  //       setErrorMessage(error);
+  //       console.log(error);
+  //     }
+  //   }, [error]);
 
   // Alert fade
   React.useEffect(() => {
@@ -159,6 +159,10 @@ export default function NewProduct({ existingProduct }) {
 
         {showSuccessAlert && (
           <AlertMessage type="success" message="Product Added Successfully" />
+        )}
+
+        {error && (
+          <AlertMessage type="error" message={error.response.data.message} />
         )}
 
         <button type="submit" className="submit-button">

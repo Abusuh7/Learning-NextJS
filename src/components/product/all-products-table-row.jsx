@@ -55,6 +55,7 @@ const AllProductsTableRow = ({ existingProduct }) => {
               <AlertMessage type="success" message="Deleted" />
             )
             }
+
           </div>
         </td>
       </tr>

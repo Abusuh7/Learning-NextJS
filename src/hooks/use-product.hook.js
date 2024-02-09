@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function useProduct(props) {
   const [product, setProduct] = useState(props.product || {});
-  const [error, setError] = useState({});
+  const [error, setError] = useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   
 
@@ -13,9 +13,10 @@ export default function useProduct(props) {
   const createProduct = async () => {
     try {
       const response = await axios.post("/api/product/addProduct", product);
-      console.log(response.data.message);
       if (response.status === 200) {
         setShowSuccessAlert(true);
+      }else{
+        setError(true);
       }
     } catch (error) {
       console.error("Error adding product:", error);
